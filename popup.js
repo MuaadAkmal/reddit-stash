@@ -25,11 +25,11 @@ document.getElementById('openSidebarButton').addEventListener('click', () => {
         if (chrome.sidePanel) {
           chrome.sidePanel.open({ tabId: tabs[0].id }).catch(error => {
             console.error("Side panel error:", error);
-            // Fallback to new tab
+            
             chrome.tabs.create({ url: chrome.runtime.getURL('sidebar.html') });
           });
         } else {
-          // Fallback for browsers without side panel support
+          
           chrome.tabs.create({ url: chrome.runtime.getURL('sidebar.html') });
         }
       } catch (e) {
@@ -54,7 +54,6 @@ function displayStashedLinks() {
       return;
     }
     
-    // Display the 5 most recent items
     const recentItems = [...data.stashedLinks]
       .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0))
       .slice(0, 5);
